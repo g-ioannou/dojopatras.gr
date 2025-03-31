@@ -1,0 +1,25 @@
+{
+  "name": "with-svelte",
+  "private": true,
+  "scripts": {
+    "build": "dotenv -- turbo run build --ui stream",
+    "dev": "dotenv -- turbo run dev",
+    "preview": "dotenv -- turbo run preview",
+    "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "check-types": "turbo run check-types",
+    "migrate:status": "dotenv -- turbo migrate:status"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0",
+    "prettier-plugin-svelte": "^3.3.3",
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv-cli": "^8.0.0"
+  }
+}
