@@ -14,6 +14,9 @@ const config: Config = {
 			}
 		},
 		extend: {
+			dropShadow: {
+				top: '0 -1px 10px hsl(150deg, 3.45%, 11.4%)'
+			},
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',

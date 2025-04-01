@@ -5,7 +5,7 @@
 @layer base {
 	:root {
 		/* start color names*/
-		--dark-grayish-blue-green: 150deg, 3.45%, 11.4%;
+		--dark-grayish-blue-green: 150 3.45% 11.4%;
 		--light-grayish-orange: 21 100% 95.3%;
         /* end color names */
 

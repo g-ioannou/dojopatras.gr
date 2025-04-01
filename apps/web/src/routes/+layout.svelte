@@ -5,11 +5,12 @@
 	import Masonry from '$lib/components/Masonry.svelte';
 
 	import '../app.css';
+	import Footer from '$lib/components/Footer.svelte';
 
 	let { children, data }: LayoutProps = $props();
 </script>
 
-<div class="fixed z-[-1] mx-auto bg-background flex justify-center w-screen">
+<div class="fixed z-[-1] mx-auto flex w-screen justify-center bg-background text-foreground">
 	<Masonry gridGap={0.8}>
 		{#if data.media?.docs}
 			{#each data.media.docs as media (media.id)}
@@ -29,5 +30,5 @@
 	<main class="grow">
 		{@render children()}
 	</main>
-	<footer class="min-h-56 text-foreground"> aaaaaa  footer</footer>
+    <Footer />
 </div>
