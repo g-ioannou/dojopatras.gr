@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-    import '../app.css'
+	import AppBar from '$lib/components/AppBar.svelte';
+	import '../app.css';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
-this is the layout
-<Button> test</Button>
+<div class="container mx-auto p-4">
+	<AppBar deviceType={data.deviceType} />
+</div>
 {@render children()}
