@@ -3,7 +3,6 @@
 </script>
 
 <h1>Web</h1>
-<pre>{JSON.stringify(data, null, 4)}</pre>
 {#if data.media?.docs}
 	{#each data.media.docs as media (media.id)}
 		<img src="{media.url}" alt={media.alt} />
