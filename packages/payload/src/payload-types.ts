@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'news-and-announcements': NewsAndAnnouncement;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'news-and-announcements': NewsAndAnnouncementsSelect<false> | NewsAndAnnouncementsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -151,6 +153,44 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-and-announcements".
+ */
+export interface NewsAndAnnouncement {
+  id: number;
+  title: string;
+  /**
+   * Drafts will not be displayed on the website.
+   */
+  draft?: boolean | null;
+  /**
+   * Pinned articles are always shown first. If an article is "Draft", pinning it will have no effect.
+   */
+  pinned?: boolean | null;
+  thumbnail?: (number | null) | Media;
+  contents?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Extra media to include with this article
+   */
+  media?: (number | Media)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -163,6 +203,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'news-and-announcements';
+        value: number | NewsAndAnnouncement;
       } | null)
     | ({
         relationTo: 'payload-locked-documents';
@@ -250,6 +294,20 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-and-announcements_select".
+ */
+export interface NewsAndAnnouncementsSelect<T extends boolean = true> {
+  title?: T;
+  draft?: T;
+  pinned?: T;
+  thumbnail?: T;
+  contents?: T;
+  media?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

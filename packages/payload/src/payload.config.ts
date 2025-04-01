@@ -2,6 +2,7 @@ import { buildConfig, type SanitizedConfig, type Config } from 'payload';
 
 import { Users } from './collections/Users';
 import { Media } from './collections/Media';
+import { NewsAndAnnouncements } from './collections/NewsAndAnnouncements';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -18,7 +19,7 @@ export const config: Config = {
       baseDir: dirname
     }
   },
-  collections: [Users, Media],
+  collections: [Users, Media, NewsAndAnnouncements],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: [dirname, 'payload-types.ts'].join('/')
@@ -48,7 +49,8 @@ let sanitizedConfig: SanitizedConfig | undefined;
 try {
   sanitizedConfig = await buildConfig(config);
 } catch (e) {
-  console.warn('Payload config already built');
+  console.error(e);
+  process.exit(1);
 }
 
 export default sanitizedConfig;

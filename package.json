@@ -8,7 +8,10 @@
     "lint": "turbo run lint",
     "format": "prettier --write .",
     "check-types": "turbo run check-types",
-    "migrate:status": "dotenv -- turbo migrate:status"
+    "payload": "dotenv -- turbo payload",
+    "migrate": "dotenv -- turbo migrate --filter=@repo/payload",
+    "migrate:create": "dotenv -- turbo migrate:create --filter=@repo/payload",
+    "migrate:status": "dotenv -- turbo migrate:status --filter=@repo/payload"
   },
   "devDependencies": {
     "prettier": "^3.5.0",
