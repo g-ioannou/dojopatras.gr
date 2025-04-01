@@ -4,17 +4,22 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
+		/* start color names*/
+		--dark-grayish-blue-green: 150deg, 3.45%, 11.4%;
+		--light-grayish-orange: 21 100% 95.3%;
+        /* end color names */
+
+		--background: var(--light-grayish-orange);
+		--foreground: var(--dark-grayish-blue-green);
 
 		--muted: 210 40% 96.1%;
 		--muted-foreground: 215.4 16.3% 46.9%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
+		--popover: var(--light-grayish-orange);
+		--popover-foreground: var(--dark-grayish-blue-green);
 
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
+		--card: var(--light-grayish-orange);
+		--card-foreground: var(--dark-grayish-blue-green);
 
 		--border: 214.3 31.8% 91.4%;
 		--input: 214.3 31.8% 91.4%;
@@ -31,22 +36,22 @@
 		--destructive: 0 72.2% 50.6%;
 		--destructive-foreground: 210 40% 98%;
 
-		--ring: 222.2 84% 4.9%;
+		--ring: var(--dark-grayish-blue-green);
 
 		--radius: 0.5rem;
 	}
 
 	.dark {
-		--background: 222.2 84% 4.9%;
+		--background: var(--dark-grayish-blue-green);
 		--foreground: 210 40% 98%;
 
 		--muted: 217.2 32.6% 17.5%;
 		--muted-foreground: 215 20.2% 65.1%;
 
-		--popover: 222.2 84% 4.9%;
+		--popover: var(--dark-grayish-blue-green);
 		--popover-foreground: 210 40% 98%;
 
-		--card: 222.2 84% 4.9%;
+		--card: var(--dark-grayish-blue-green);
 		--card-foreground: 210 40% 98%;
 
 		--border: 217.2 32.6% 17.5%;
@@ -76,4 +81,3 @@
 		@apply bg-background text-foreground;
 	}
 }
-
