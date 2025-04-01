@@ -1,7 +1,9 @@
 import type { LayoutServerLoad } from "./$types";
+import { payload as P } from '$lib/server';
 
-export const load: LayoutServerLoad = ({locals}) => {
+export const load: LayoutServerLoad = async ({locals}) => {
     return {
-        deviceType: locals.deviceType
+        deviceType: locals.deviceType,
+		media: await P?.find({ collection: 'media', pagination: false })
     }
 };
