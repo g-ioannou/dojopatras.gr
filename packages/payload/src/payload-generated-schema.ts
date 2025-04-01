@@ -15,6 +15,7 @@ import {
   timestamp,
   varchar,
   numeric,
+  boolean,
   integer,
   jsonb
 } from '@payloadcms/db-postgres/drizzle/pg-core';
@@ -53,7 +54,7 @@ export const media = pgTable(
   'media',
   {
     id: serial('id').primaryKey(),
-    alt: varchar('alt').notNull(),
+    alt: varchar('alt').default('image'),
     updatedAt: timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 3 })
       .defaultNow()
       .notNull(),
@@ -74,6 +75,69 @@ export const media = pgTable(
     media_updated_at_idx: index('media_updated_at_idx').on(columns.updatedAt),
     media_created_at_idx: index('media_created_at_idx').on(columns.createdAt),
     media_filename_idx: uniqueIndex('media_filename_idx').on(columns.filename)
+  })
+);
+
+export const news_and_announcements = pgTable(
+  'news_and_announcements',
+  {
+    id: serial('id').primaryKey(),
+    title: varchar('title').notNull(),
+    draft: boolean('draft'),
+    pinned: boolean('pinned'),
+    thumbnail: integer('thumbnail_id').references(() => media.id, {
+      onDelete: 'set null'
+    }),
+    contents: jsonb('contents'),
+    updatedAt: timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 3 })
+      .defaultNow()
+      .notNull(),
+    createdAt: timestamp('created_at', { mode: 'string', withTimezone: true, precision: 3 })
+      .defaultNow()
+      .notNull()
+  },
+  (columns) => ({
+    news_and_announcements_title_idx: uniqueIndex('news_and_announcements_title_idx').on(
+      columns.title
+    ),
+    news_and_announcements_thumbnail_idx: index('news_and_announcements_thumbnail_idx').on(
+      columns.thumbnail
+    ),
+    news_and_announcements_updated_at_idx: index('news_and_announcements_updated_at_idx').on(
+      columns.updatedAt
+    ),
+    news_and_announcements_created_at_idx: index('news_and_announcements_created_at_idx').on(
+      columns.createdAt
+    )
+  })
+);
+
+export const news_and_announcements_rels = pgTable(
+  'news_and_announcements_rels',
+  {
+    id: serial('id').primaryKey(),
+    order: integer('order'),
+    parent: integer('parent_id').notNull(),
+    path: varchar('path').notNull(),
+    mediaID: integer('media_id')
+  },
+  (columns) => ({
+    order: index('news_and_announcements_rels_order_idx').on(columns.order),
+    parentIdx: index('news_and_announcements_rels_parent_idx').on(columns.parent),
+    pathIdx: index('news_and_announcements_rels_path_idx').on(columns.path),
+    news_and_announcements_rels_media_id_idx: index('news_and_announcements_rels_media_id_idx').on(
+      columns.mediaID
+    ),
+    parentFk: foreignKey({
+      columns: [columns['parent']],
+      foreignColumns: [news_and_announcements.id],
+      name: 'news_and_announcements_rels_parent_fk'
+    }).onDelete('cascade'),
+    mediaIdFk: foreignKey({
+      columns: [columns['mediaID']],
+      foreignColumns: [media.id],
+      name: 'news_and_announcements_rels_media_fk'
+    }).onDelete('cascade')
   })
 );
 
@@ -110,7 +174,8 @@ export const payload_locked_documents_rels = pgTable(
     parent: integer('parent_id').notNull(),
     path: varchar('path').notNull(),
     usersID: integer('users_id'),
-    mediaID: integer('media_id')
+    mediaID: integer('media_id'),
+    'news-and-announcementsID': integer('news_and_announcements_id')
   },
   (columns) => ({
     order: index('payload_locked_documents_rels_order_idx').on(columns.order),
@@ -122,6 +187,9 @@ export const payload_locked_documents_rels = pgTable(
     payload_locked_documents_rels_media_id_idx: index(
       'payload_locked_documents_rels_media_id_idx'
     ).on(columns.mediaID),
+    payload_locked_documents_rels_news_and_announcements_id_idx: index(
+      'payload_locked_documents_rels_news_and_announcements_id_idx'
+    ).on(columns['news-and-announcementsID']),
     parentFk: foreignKey({
       columns: [columns['parent']],
       foreignColumns: [payload_locked_documents.id],
@@ -136,6 +204,11 @@ export const payload_locked_documents_rels = pgTable(
       columns: [columns['mediaID']],
       foreignColumns: [media.id],
       name: 'payload_locked_documents_rels_media_fk'
+    }).onDelete('cascade'),
+    'news-and-announcementsIdFk': foreignKey({
+      columns: [columns['news-and-announcementsID']],
+      foreignColumns: [news_and_announcements.id],
+      name: 'payload_locked_documents_rels_news_and_announcements_fk'
     }).onDelete('cascade')
   })
 );
@@ -218,6 +291,34 @@ export const payload_migrations = pgTable(
 
 export const relations_users = relations(users, () => ({}));
 export const relations_media = relations(media, () => ({}));
+export const relations_news_and_announcements_rels = relations(
+  news_and_announcements_rels,
+  ({ one }) => ({
+    parent: one(news_and_announcements, {
+      fields: [news_and_announcements_rels.parent],
+      references: [news_and_announcements.id],
+      relationName: '_rels'
+    }),
+    mediaID: one(media, {
+      fields: [news_and_announcements_rels.mediaID],
+      references: [media.id],
+      relationName: 'media'
+    })
+  })
+);
+export const relations_news_and_announcements = relations(
+  news_and_announcements,
+  ({ one, many }) => ({
+    thumbnail: one(media, {
+      fields: [news_and_announcements.thumbnail],
+      references: [media.id],
+      relationName: 'thumbnail'
+    }),
+    _rels: many(news_and_announcements_rels, {
+      relationName: '_rels'
+    })
+  })
+);
 export const relations_payload_locked_documents_rels = relations(
   payload_locked_documents_rels,
   ({ one }) => ({
@@ -235,6 +336,11 @@ export const relations_payload_locked_documents_rels = relations(
       fields: [payload_locked_documents_rels.mediaID],
       references: [media.id],
       relationName: 'media'
+    }),
+    'news-and-announcementsID': one(news_and_announcements, {
+      fields: [payload_locked_documents_rels['news-and-announcementsID']],
+      references: [news_and_announcements.id],
+      relationName: 'news-and-announcements'
     })
   })
 );
@@ -271,6 +377,8 @@ export const relations_payload_migrations = relations(payload_migrations, () => 
 type DatabaseSchema = {
   users: typeof users;
   media: typeof media;
+  news_and_announcements: typeof news_and_announcements;
+  news_and_announcements_rels: typeof news_and_announcements_rels;
   payload_locked_documents: typeof payload_locked_documents;
   payload_locked_documents_rels: typeof payload_locked_documents_rels;
   payload_preferences: typeof payload_preferences;
@@ -278,6 +386,8 @@ type DatabaseSchema = {
   payload_migrations: typeof payload_migrations;
   relations_users: typeof relations_users;
   relations_media: typeof relations_media;
+  relations_news_and_announcements_rels: typeof relations_news_and_announcements_rels;
+  relations_news_and_announcements: typeof relations_news_and_announcements;
   relations_payload_locked_documents_rels: typeof relations_payload_locked_documents_rels;
   relations_payload_locked_documents: typeof relations_payload_locked_documents;
   relations_payload_preferences_rels: typeof relations_payload_preferences_rels;

@@ -1,5 +1,5 @@
 {
-  "id": "a4d1efb0-b583-4aba-a124-b7347ecf419b",
+  "id": "5c4f2f1b-8168-4d46-b8f0-7fcfe766b717",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -140,7 +140,8 @@
           "name": "alt",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false,
+          "default": "'image'"
         },
         "updated_at": {
           "name": "updated_at",

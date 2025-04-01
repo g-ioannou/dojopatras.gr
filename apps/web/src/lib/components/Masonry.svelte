@@ -3,9 +3,9 @@
 
 	interface MasonryProps {
 		stretchFirst?: boolean;
-		gridGap?: string;
+		gridGap?: string | number;
 		colWidth?: string;
-		items?: any[];
+		items?: Snippet[];
 		reset?: boolean;
 		children: Snippet;
 	}
@@ -26,6 +26,10 @@
 		reset = false,
 		children
 	}: MasonryProps = $props();
+
+	if (typeof gridGap === 'number') {
+		gridGap = `${gridGap}em`;
+	}
 
 	let grids: GridItem[] = [];
 	let masonryElement: HTMLElement | null = null;
