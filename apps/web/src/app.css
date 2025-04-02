@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'NotoSansKR';
-	src: url('/NotoSansKR-VariableFont_wght.ttf');
+	font-family: 'Incise';
+	src: url('/NomadaIncise-Light.ttf');
 	/* font-weight: 400; */
 	/* font-style: normal; */
 	/* font-display: swap; */

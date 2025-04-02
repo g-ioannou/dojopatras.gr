@@ -7,7 +7,8 @@ const config: Config = {
 	safelist: ['dark'],
 	theme: {
         fontFamily: {
-            gaveliana: ['Gaveliana', 'sans-serif']
+            gaveliana: ['Gaveliana', 'sans-serif'],
+            incise: ['Incise', 'sans-serif']
         },
 		container: {
 			center: true,
