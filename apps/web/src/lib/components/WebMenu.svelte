@@ -23,6 +23,7 @@
 	}
 	const links: AppLink[] = [
 		{ href: '/', text: 'Αρχική' },
+		{ href: '/news-and-announcements', text: 'Νέα & Ανακοινώσεις' },
 		{ href: '/academy', text: 'Η Σχολή' },
 		{ href: '/contact', text: 'Επικοινωνία' }
 	];
