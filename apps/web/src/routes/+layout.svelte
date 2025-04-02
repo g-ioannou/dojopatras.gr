@@ -25,7 +25,7 @@
 	</Masonry>
 </div>
 
-<div class="flex min-h-screen flex-col">
+<div class="flex min-h-screen flex-col font-gaveliana">
 	<AppBar deviceType={data.deviceType} />
 	<main class="grow">
 		{@render children()}
