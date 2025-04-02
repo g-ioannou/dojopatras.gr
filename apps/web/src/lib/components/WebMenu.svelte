@@ -5,14 +5,10 @@
 	import {
 		Root as SheetRoot,
 		SheetContent,
-		SheetHeader,
-		SheetTitle,
 		SheetFooter,
 		SheetClose,
-		SheetTrigger,
-		SheetDescription
+		SheetTrigger
 	} from './ui/sheet/index';
-	import { SelectItem } from './ui/select';
 
 	const pathname = $derived.by(() => {
 		const state = $state(page.url.pathname);

@@ -17,7 +17,7 @@
 				<img
 					src={media.url}
 					alt={media.alt}
-					class="w-full sm:rounded-[5px] brightness-50 sepia-[.6]"
+					class="w-full brightness-50 sepia-[.6] sm:rounded-[5px]"
 					loading="lazy"
 				/>
 			{/each}
@@ -26,9 +26,9 @@
 </div>
 
 <div class="flex min-h-screen flex-col font-gaveliana">
-	<AppBar deviceType={data.deviceType} />
+	<AppBar />
 	<main class="grow">
 		{@render children()}
 	</main>
-    <Footer />
+	<Footer />
 </div>
