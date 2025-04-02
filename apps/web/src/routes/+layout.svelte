@@ -17,7 +17,7 @@
 				<img
 					src={media.url}
 					alt={media.alt}
-					class="w-full rounded-[5px] brightness-50 sepia-[.6]"
+					class="w-full sm:rounded-[5px] brightness-50 sepia-[.6]"
 					loading="lazy"
 				/>
 			{/each}
