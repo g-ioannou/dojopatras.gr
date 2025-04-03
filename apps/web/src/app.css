@@ -12,9 +12,9 @@
 @font-face {
 	font-family: 'Gaveliana';
 	src: url('/Gaveliana.otf');
-	/* font-weight: 400; */
-	/* font-style: normal; */
-	/* font-display: swap; */
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 @layer base {
@@ -22,16 +22,16 @@
 		/* start color names*/
 		--dark-grayish-blue-green: 150 3.45% 11.4%;
 		--light-grayish-orange: 21 100% 95.3%;
-        --amaranth-purple: 351 52.3% 42.7%; /* mostly red */
-        --cambridge-blue: 136 22% 55%; /* somewhat green */
-        --vista-blue: 212 43% 65%;
+		--amaranth-purple: 351 52.3% 42.7%; /* mostly red */
+		--cambridge-blue: 136 22% 55%; /* somewhat green */
+		--vista-blue: 212 43% 65%;
 		/* end color names */
 
 		--background: var(--light-grayish-orange);
 		--foreground: var(--dark-grayish-blue-green);
 
 		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
+		--muted-foreground: 45 5% 61%;
 
 		--popover: var(--light-grayish-orange);
 		--popover-foreground: var(--dark-grayish-blue-green);
@@ -39,11 +39,11 @@
 		--card: var(--light-grayish-orange);
 		--card-foreground: var(--dark-grayish-blue-green);
 
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
+		--border: var(--amaranth-purple);
+		--input: var(--amaranth-purple);
 
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
+		--primary: var(--amaranth-purple);
+		--primary-foreground: var(--light-grayish-orange);
 
 		--secondary: 210 40% 96.1%;
 		--secondary-foreground: 222.2 47.4% 11.2%;
@@ -97,5 +97,56 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+	h1 {
+		@apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+	}
+
+	h2 {
+		@apply scroll-m-20 border-b-4 pb-2 text-3xl font-semibold tracking-wide;
+	}
+
+	h3 {
+		@apply scroll-m-20 text-2xl font-semibold tracking-tight;
+	}
+
+	h4 {
+		@apply scroll-m-20 text-xl font-semibold tracking-tight;
+	}
+
+	h5 {
+		@apply scroll-m-20 text-lg font-semibold tracking-tight;
+	}
+
+	h6 {
+		@apply scroll-m-20 font-semibold tracking-tight;
+	}
+
+	p {
+		@apply leading-7;
+	}
+
+	blockquote {
+		@apply border-l-2 pl-6 italic;
+	}
+
+	tr {
+		@apply m-0 border-t p-0 even:bg-muted;
+	}
+
+	th {
+		@apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+	}
+
+	td {
+		@apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+	}
+
+	code {
+		@apply  relative rounded bg-muted px-[0.3rem] py-[0.2rem] text-sm font-semibold;
+	}
+
+	small {
+		@apply text-sm font-medium leading-none;
 	}
 }

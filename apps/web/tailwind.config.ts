@@ -19,10 +19,11 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				border: 'hsl(var(--border) / <alpha-value>)',
+				border: 'hsl(var(--border) / 0.1)',
 				input: 'hsl(var(--input) / <alpha-value>)',
 				ring: 'hsl(var(--ring) / <alpha-value>)',
 				background: 'hsl(var(--background) / <alpha-value>)',
+				"background-semitransparent": 'hsl(var(--background) / 0.8)',
 				foreground: 'hsl(var(--foreground) / <alpha-value>)',
 				primary: {
 					DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
@@ -49,7 +50,7 @@ const config: Config = {
 					foreground: 'hsl(var(--popover-foreground) / <alpha-value>)'
 				},
 				card: {
-					DEFAULT: 'hsl(var(--card) / <alpha-value>)',
+					DEFAULT: 'hsl(var(--card) / 0.2)',
 					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
 				}
 			},

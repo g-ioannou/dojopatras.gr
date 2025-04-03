@@ -46,6 +46,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.487.0",
+		"@payloadcms/richtext-lexical": "^3.32.0",
 		"ismobilejs": "^1.1.1",
 		"sveltekit-device-detector": "^2.0.1"
 	}

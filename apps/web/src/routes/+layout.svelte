@@ -25,9 +25,9 @@
 	</Masonry>
 </div>
 
-<div class="flex min-h-screen flex-col font-gaveliana">
+<div class="flex min-h-screen flex-col font-gaveliana gap-20 md:gap-40">
 	<AppBar />
-	<main class="grow">
+	<main class="grow z-10 mb-60">
 		{@render children()}
 	</main>
 	<Footer />
