@@ -86,8 +86,12 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'website-info': WebsiteInfo;
+  };
+  globalsSelect: {
+    'website-info': WebsiteInfoSelect<false> | WebsiteInfoSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -211,18 +215,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news-and-announcements';
         value: number | NewsAndAnnouncement;
-      } | null)
-    | ({
-        relationTo: 'payload-locked-documents';
-        value: number | PayloadLockedDocument;
-      } | null)
-    | ({
-        relationTo: 'payload-preferences';
-        value: number | PayloadPreference;
-      } | null)
-    | ({
-        relationTo: 'payload-migrations';
-        value: number | PayloadMigration;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -345,6 +337,60 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-info".
+ */
+export interface WebsiteInfo {
+  id: number;
+  hero?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  email?: string | null;
+  address?: string | null;
+  'contact-numbers'?:
+    | {
+        'phone-number'?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  facebook?: string | null;
+  instagram?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-info_select".
+ */
+export interface WebsiteInfoSelect<T extends boolean = true> {
+  hero?: T;
+  email?: T;
+  address?: T;
+  'contact-numbers'?:
+    | T
+    | {
+        'phone-number'?: T;
+        id?: T;
+      };
+  facebook?: T;
+  instagram?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

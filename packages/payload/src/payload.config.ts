@@ -4,6 +4,8 @@ import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { NewsAndAnnouncements } from './collections/NewsAndAnnouncements';
 
+import { Website } from './globals/Website';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { postgresAdapter } from '@payloadcms/db-postgres';
@@ -19,6 +21,11 @@ const collections = [Users, Media, NewsAndAnnouncements].map((collectionConfig) 
   };
 });
 
+const globals = [Website].map((globalConfig) => ({
+  ...globalConfig,
+  lockDocuments: false as false
+}));
+
 export const config: Config = {
   serverURL: process.env.PAYLOAD_PUBLIC_BACKEND_URL || '',
   admin: {
@@ -28,6 +35,7 @@ export const config: Config = {
     }
   },
   collections: collections,
+  globals: globals,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: [dirname, 'payload-types.ts'].join('/')
