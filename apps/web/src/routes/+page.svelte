@@ -21,7 +21,7 @@
 		})) ?? [];
 </script>
 
-<div class="flex flex-col gap-20 bg-foreground py-20 text-background shadow-2xl">
+<div class="flex flex-col gap-20 bg-background text-foreground py-20  shadow-2xl dark">
 	<div class="container">
 		<h1 class="text-muted-foreground">Τελευταία νέα & ανακοινώσεις</h1>
 	</div>
@@ -51,7 +51,7 @@
 						<img
 							src={announcement.thumbnail?.url}
 							alt={announcement.thumbnail?.alt}
-							class="max-h-96 w-full max-w-full self-start bg-background object-cover p-6 sm:p-9 md:p-12"
+							class="max-h-96 w-full max-w-full self-start  object-cover bg-foreground px-4 py-6 sm:px-6 sm:py-9 md:px-8 md:py-10"
 						/>
 					</div>
 				{/if}

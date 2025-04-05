@@ -6,7 +6,9 @@ export const load: PageServerLoad = async () => {
 		recentAnnouncements: await P?.find({
 			collection: 'news-and-announcements',
 			depth: 3,
-			where: { or: [{ draft: { equals: null } }, { draft: { equals: false } }] },
+			where: {
+				or: [{ draft: { equals: null } }, { draft: { equals: false } }],
+			},
 			sort: ['-pinned', '-created_at'],
 			limit: 3,
 			pagination: false
