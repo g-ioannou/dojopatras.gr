@@ -88,7 +88,12 @@
 			{@render buttonLinks(links)}
 		</div>
 		<SheetFooter>
-			<img src="/logo_graphics_only.png" alt="Dojo Patras logo" class="h-12 w-12 sm:h-16 sm:w-16" />
+			<div class="flex flex-col items-center justify-center font-incise">
+				<div>
+					<img src="/logo_graphics_only.png" alt="Footer Dojo Patras logo" class="h-20" />
+				</div>
+				DOJO PATRAS
+			</div>
 		</SheetFooter>
 	</SheetContent>
 </SheetRoot>

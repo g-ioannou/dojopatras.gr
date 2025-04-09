@@ -1,4 +1,4 @@
-<footer class="min-h-56 bg-foreground text-background drop-shadow-top p-4">
+<footer class="dark min-h-56 bg-background text-foreground shadow-2xl p-4">
 	<div class="container mx-auto flex align-center">
 		<div class="flex flex-col justify-center items-center font-incise">
 			<div>

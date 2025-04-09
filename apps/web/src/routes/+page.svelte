@@ -21,11 +21,9 @@
 				day: 'numeric'
 			})
 		})) ?? [];
-
-	console.log(websiteInfo);
 </script>
 
-<div class="flex flex-col gap-56">
+<div class="md:30 flex flex-col gap-20 lg:gap-40">
 	{#if websiteInfo?.hero}
 		<div class="flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
 			<div class="container">
@@ -34,9 +32,12 @@
 		</div>
 	{/if}
 
-	<div class="flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
-		<div class="container">
-			<h1 class="text-muted-foreground">Τελευταία νέα & ανακοινώσεις</h1>
+	<div class="dark flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
+		<div class="container flex flex-col sm:flex-row  sm:justify-between items-start">
+			<h1>Τελευταία νέα & ανακοινώσεις</h1>
+			<Button variant='link' class='p-0'>
+				<a href="/news-and-announcements" class='decoration-dotted underline'>Δες τα όλα</a>
+			</Button>
 		</div>
 		{#each announcements as announcement (announcement.id)}
 			{@const hasThumbnail = announcement.thumbnail !== null}

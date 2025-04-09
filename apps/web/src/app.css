@@ -102,11 +102,11 @@
 		@apply bg-background text-foreground;
 	}
 	h1 {
-		@apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+		@apply scroll-m-20 text-5xl font-extrabold tracking-widest lg:text-5xl text-foreground;
 	}
 
 	h2 {
-		@apply scroll-m-20 border-b-4 pb-2 text-3xl font-semibold tracking-wide;
+		@apply scroll-m-20 border-b-4 pb-2 text-3xl font-semibold tracking-wider text-muted-foreground;
 	}
 
 	h3 {
