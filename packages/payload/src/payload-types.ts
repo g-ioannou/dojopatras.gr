@@ -215,6 +215,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news-and-announcements';
         value: number | NewsAndAnnouncement;
+      } | null)
+    | ({
+        relationTo: 'payload-locked-documents';
+        value: number | PayloadLockedDocument;
+      } | null)
+    | ({
+        relationTo: 'payload-preferences';
+        value: number | PayloadPreference;
+      } | null)
+    | ({
+        relationTo: 'payload-migrations';
+        value: number | PayloadMigration;
       } | null);
   globalSlug?: string | null;
   user: {

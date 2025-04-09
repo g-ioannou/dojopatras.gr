@@ -45,7 +45,7 @@ export const config: Config = {
       connectionString: process.env.DATABASE_URL || ''
     },
     // prodMigrations: migrations, // this will cause turbo build to stall
-    push: false
+    // push: false
   }),
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()]
@@ -69,7 +69,7 @@ let sanitizedConfig: SanitizedConfig | undefined;
 try {
   sanitizedConfig = await buildConfig(config);
 } catch (e) {
-  console.error(e);
+  console.error(JSON.stringify(e));
   process.exit(1);
 }
 

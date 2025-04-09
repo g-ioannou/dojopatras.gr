@@ -9,6 +9,7 @@
 		SheetClose,
 		SheetTrigger
 	} from './ui/sheet/index';
+	import { goto } from '$app/navigation';
 
 	const pathname = $derived.by(() => {
 		const state = $state(page.url.pathname);
@@ -32,14 +33,16 @@
 {#snippet buttonLinks(links: AppLink[])}
 	{#each links as link (link.href)}
 		<Button
+			class="p-0"
 			variant="ghost"
 			on:click={() => {
 				menuOpen = false;
+				goto(link.href);
 			}}
 		>
 			<a
 				href={link.href}
-				class="text-base decoration-accent decoration-2"
+				class="p-4 text-base decoration-accent decoration-2"
 				class:underline={pathname === link.href}
 			>
 				{link.text}
@@ -49,7 +52,7 @@
 {/snippet}
 
 <SheetRoot open={menuOpen}>
-	<div class="bg-background shadow-xl">
+	<div class="bg-background shadow-lg">
 		<div class="container flex justify-between py-4 md:py-8">
 			<div>
 				<img src="/logo_with_name.png" class="h-12 min-w-max md:h-14" alt="Dojo Patras logo" />
