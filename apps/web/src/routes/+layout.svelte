@@ -8,6 +8,16 @@
 	import MasonryItem from '$lib/components/MasonryItem.svelte';
 
 	let { children, data }: LayoutProps = $props();
+
+	const contactDetails = {
+		address: data.websiteInfo?.address ?? '',
+		contactNumbers:
+			data.websiteInfo?.['contact-numbers']?.map((n) => n['phone-number'] ?? '') ?? [],
+		email: data.websiteInfo?.email ?? '',
+		facebookLink: data.websiteInfo?.facebook ?? '',
+		instagramLink: data.websiteInfo?.instagram ?? '',
+		location: data.websiteInfo?.['map-location'] ?? [0, 0]
+	};
 </script>
 
 <div class="fixed z-[-1] flex h-screen w-screen">
@@ -30,19 +40,9 @@
 </div>
 
 <div class="md:30 flex min-h-screen flex-col gap-20 font-gaveliana lg:gap-40">
-	<AppBar />
+	<AppBar {contactDetails}/>
 	<main class="z-10 grow">
 		{@render children()}
 	</main>
-	<Footer
-		contactDetails={{
-			address: data.websiteInfo?.address ?? '',
-			contactNumbers:
-				data.websiteInfo?.['contact-numbers']?.map((n) => n['phone-number'] ?? '') ?? [],
-			email: data.websiteInfo?.email ?? '',
-			facebookLink: data.websiteInfo?.facebook ?? '',
-			instagramLink: data.websiteInfo?.instagram ?? '',
-			location: data.websiteInfo?.['map-location'] ?? [0, 0]
-		}}
-	/>
+	<Footer {contactDetails} />
 </div>
