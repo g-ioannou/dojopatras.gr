@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { AtSignIcon, FacebookIcon, InstagramIcon, MapPinIcon, PhoneIcon } from '@lucide/svelte';
 	import { Button } from './ui/button';
+	import Map from './Map.svelte';
 
 	interface FooterProps {
 		contactNumbers: string[];
@@ -24,14 +25,16 @@
 	</div>
 {/snippet}
 
-<footer class="dark flex flex-col lg:flex-row min-h-56 gap-8 bg-background text-foreground shadow-2xl sm:p-10 md:p-20">
-	<div class="flex w-full lg:w-1/6 flex-col items-center justify-center font-incise">
+<footer
+	class="dark flex min-h-56 flex-col gap-8 bg-background text-foreground shadow-2xl sm:p-10 md:p-20 lg:flex-row"
+>
+	<div class="flex w-full flex-col items-center justify-center font-incise lg:w-1/6">
 		<div>
 			<img src="/logo_graphics_only.png" alt="Footer Dojo Patras logo" class="h-28" />
 		</div>
 		DOJO PATRAS
 	</div>
-	<div class="flex flex-col lg:flex-row grow gap-16">
+	<div class="flex grow flex-col gap-16 lg:flex-row">
 		<div class="flex flex-col gap-4 p-4 lg:p-0">
 			{@render footerSectionTitle('Σελίδες')}
 			<a href="/" class="w-max">Αρχική</a>
@@ -62,5 +65,7 @@
 			</div>
 		</div>
 	</div>
-	<div>map here</div>
+	<div class="relative w-full lg:w-80 h-60 rounded-sm p-4 bg-secondary">
+		<Map lon={contactDetails.location[0]} lat={contactDetails.location[1]}/>
+	</div>
 </footer>
