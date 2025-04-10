@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     'news-and-announcements': NewsAndAnnouncement;
+    coaches: Coach;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'news-and-announcements': NewsAndAnnouncementsSelect<false> | NewsAndAnnouncementsSelect<true>;
+    coaches: CoachesSelect<false> | CoachesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -199,6 +201,33 @@ export interface NewsAndAnnouncement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coaches".
+ */
+export interface Coach {
+  id: number;
+  name?: string | null;
+  surname?: string | null;
+  picture?: (number | null) | Media;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -215,6 +244,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news-and-announcements';
         value: number | NewsAndAnnouncement;
+      } | null)
+    | ({
+        relationTo: 'coaches';
+        value: number | Coach;
       } | null)
     | ({
         relationTo: 'payload-locked-documents';
@@ -320,6 +353,18 @@ export interface NewsAndAnnouncementsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coaches_select".
+ */
+export interface CoachesSelect<T extends boolean = true> {
+  name?: T;
+  surname?: T;
+  picture?: T;
+  bio?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -372,6 +417,11 @@ export interface WebsiteInfo {
     [k: string]: unknown;
   } | null;
   email?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  'map-location'?: [number, number] | null;
   address?: string | null;
   'contact-numbers'?:
     | {
@@ -391,6 +441,7 @@ export interface WebsiteInfo {
 export interface WebsiteInfoSelect<T extends boolean = true> {
   hero?: T;
   email?: T;
+  'map-location'?: T;
   address?: T;
   'contact-numbers'?:
     | T

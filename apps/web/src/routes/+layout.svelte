@@ -2,8 +2,6 @@
 	import AppBar from '$lib/components/AppBar.svelte';
 	import type { LayoutProps } from './$types';
 
-	import Masonry from '$lib/components/Masonry.svelte';
-
 	import '../app.css';
 	import Footer from '$lib/components/Footer.svelte';
 	import MasonryTemp from '$lib/components/MasonryTemp.svelte';
@@ -12,11 +10,9 @@
 	let { children, data }: LayoutProps = $props();
 </script>
 
-<div class="fixed  z-[-1] flex w-screen h-screen">
+<div class="fixed z-[-1] flex h-screen w-screen">
 	{#if data.media?.docs}
-		<div
-			class="fixed   bg-transparent  p-0 text-foreground sm:px-4"
-		>
+		<div class="fixed bg-transparent p-0 text-foreground sm:px-4">
 			<MasonryTemp>
 				{#each data.media.docs as media (media.id)}
 					<MasonryItem>
@@ -33,10 +29,20 @@
 	{/if}
 </div>
 
-<div class="flex min-h-screen flex-col font-gaveliana gap-20 md:30 lg:gap-40">
+<div class="md:30 flex min-h-screen flex-col gap-20 font-gaveliana lg:gap-40">
 	<AppBar />
-	<main class="grow z-10">
+	<main class="z-10 grow">
 		{@render children()}
 	</main>
-	<Footer />
+	<Footer
+		contactDetails={{
+			address: data.websiteInfo?.address ?? '',
+			contactNumbers:
+				data.websiteInfo?.['contact-numbers']?.map((n) => n['phone-number'] ?? '') ?? [],
+			email: data.websiteInfo?.email ?? '',
+			facebookLink: data.websiteInfo?.facebook ?? '',
+			instagramLink: data.websiteInfo?.instagram ?? '',
+			location: data.websiteInfo?.['map-location'] ?? [0, 0]
+		}}
+	/>
 </div>

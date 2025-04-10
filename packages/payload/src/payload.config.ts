@@ -3,6 +3,7 @@ import { buildConfig, type SanitizedConfig, type Config } from 'payload';
 import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { NewsAndAnnouncements } from './collections/NewsAndAnnouncements';
+import { Coaches } from './collections/Coaches';
 
 import { Website } from './globals/Website';
 
@@ -14,7 +15,7 @@ import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const collections = [Users, Media, NewsAndAnnouncements].map((collectionConfig) => {
+const collections = [Users, Media, NewsAndAnnouncements, Coaches].map((collectionConfig) => {
   return {
     ...collectionConfig,
     lockDocuments: false as false // lmao

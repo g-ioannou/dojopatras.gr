@@ -11,7 +11,7 @@ const buttonVariants = tv({
 			outline: 'border-input bg-background hover:bg-accent hover:text-accent-foreground border',
 			'outline-inverted':
 				'border-input bg-background hover:bg-accent hover:text-accent-foreground border',
-			secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+			secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-accent',
 			ghost: 'hover:bg-accent hover:text-accent-foreground text-foreground',
 			link: 'text-primary underline-offset-4 hover:underline'
 		},

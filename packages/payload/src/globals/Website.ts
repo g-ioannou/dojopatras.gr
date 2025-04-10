@@ -14,6 +14,11 @@ export const Website: GlobalConfig = {
       required: false
     },
     {
+      name: 'map-location',
+    type: 'point',
+            required: false
+    },
+    {
       name: 'address',
       type: 'text',
       required: false
