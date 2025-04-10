@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "payload": "payload",
-    "migrate": "payload migrate",
+    "migrate": "NODE_ENV=production payload migrate",
     "migrate:create": "payload migrate:create",
     "migrate:status": "payload migrate:status"
   },

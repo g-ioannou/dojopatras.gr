@@ -27,9 +27,14 @@
 
 <div class="md:30 flex flex-col gap-20 lg:gap-40">
 	{#if websiteInfo?.hero}
-		<div class="flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
-			<div class="container">
+        <div class="flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
+			<div class="container flex flex-col items-center gap-8 sm:flex-row">
 				{@html convertLexicalToHTML({ data: websiteInfo.hero })}
+				{#if websiteInfo.thumbnail}
+					<div class=" p-8 bg-foreground">
+						<img src={(websiteInfo.thumbnail as Media).url} class=" object-contain" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/if}
@@ -59,7 +64,7 @@
 					>
 						<span class="text-muted-foreground">{announcement.createdAt}</span>
 						<div class="md:grow">
-							<div class="line-clamp-6">
+							<div class="line-clamp-6 [&_img]:max-h-96 [&_img]:object-contain">
 								{@html announcement.contents}
 							</div>
 						</div>

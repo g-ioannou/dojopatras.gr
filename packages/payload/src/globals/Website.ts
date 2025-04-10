@@ -9,6 +9,15 @@ export const Website: GlobalConfig = {
       required: false
     },
     {
+      name: 'thumbnail',
+      label: 'Hero Thumbnail',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        disableListColumn: true
+      }
+    },
+    {
       name: 'email',
       type: 'email',
       required: false

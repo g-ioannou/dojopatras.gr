@@ -248,18 +248,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'coaches';
         value: number | Coach;
-      } | null)
-    | ({
-        relationTo: 'payload-locked-documents';
-        value: number | PayloadLockedDocument;
-      } | null)
-    | ({
-        relationTo: 'payload-preferences';
-        value: number | PayloadPreference;
-      } | null)
-    | ({
-        relationTo: 'payload-migrations';
-        value: number | PayloadMigration;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -416,6 +404,7 @@ export interface WebsiteInfo {
     };
     [k: string]: unknown;
   } | null;
+  thumbnail?: (number | null) | Media;
   email?: string | null;
   /**
    * @minItems 2
@@ -440,6 +429,7 @@ export interface WebsiteInfo {
  */
 export interface WebsiteInfoSelect<T extends boolean = true> {
   hero?: T;
+  thumbnail?: T;
   email?: T;
   'map-location'?: T;
   address?: T;
