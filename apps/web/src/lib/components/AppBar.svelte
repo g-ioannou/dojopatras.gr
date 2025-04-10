@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Button from './ui/button/button.svelte';
-	import { MapPinIcon, MenuIcon, PhoneIcon, XIcon } from '@lucide/svelte';
+	import { FacebookIcon, InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon, XIcon } from '@lucide/svelte';
 	import {
 		Root as SheetRoot,
 		SheetContent,
@@ -25,7 +25,7 @@
 	const links: AppLink[] = [
 		{ href: '/', text: 'Αρχική' },
 		{ href: '/news-and-announcements', text: 'Νέα & Ανακοινώσεις' },
-		{ href: '/academy', text: 'Η Σχολή' }
+		{ href: '/dojo', text: 'Η Σχολή' }
 	];
 
 	interface AppBarProps {
@@ -63,9 +63,21 @@
 
 {#snippet contactDetailsSection()}
 	<div class="dark bg-background py-1 text-foreground">
-		<div class="container flex flex-col sm:flex-row sm:gap-8 sm:justify-end">
-			<div class="flex gap-2 items-center"><PhoneIcon size={16}/>{contactDetails.contactNumbers.join(" - ")}</div>
-			<div class="flex gap-2 items-center"><MapPinIcon size={16}/>{contactDetails.address}</div>
+		<div class="container flex  sm:flex-row  sm:gap-8 justify-between">
+			<div class='flex flex-col sm:flex-row sm:gap-12 sm:items-center'>
+				<div class="flex items-center gap-2">
+					<PhoneIcon size={16} />{contactDetails.contactNumbers.join(' - ')}
+				</div>
+				<div class="flex items-center gap-2"><MapPinIcon size={16} />{contactDetails.address}</div>
+			</div>
+			<div class="inline-flex gap-6 items-center">
+				<a href={contactDetails.facebookLink}>
+					<InstagramIcon size={20} />
+				</a>
+				<a href={contactDetails.facebookLink}>
+					<FacebookIcon size={20}/>
+				</a>
+			</div>
 		</div>
 	</div>
 {/snippet}
@@ -112,7 +124,7 @@
 			{@render buttonLink(links)}
 		</div>
 		<SheetFooter>
-			<div class="flex flex-col items-center justify-center font-incise w-full">
+			<div class="flex w-full flex-col items-center justify-center font-incise">
 				<div>
 					<img src="/logo_graphics_only.png" alt="Footer Dojo Patras logo" class="h-20" />
 				</div>

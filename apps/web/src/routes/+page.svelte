@@ -4,6 +4,7 @@
 	import type { PageProps } from './$types';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { cn } from '$lib/utils';
+	import { PinIcon } from '@lucide/svelte';
 
 	let { data }: PageProps = $props();
 
@@ -15,6 +16,7 @@
 			title: announcement.title,
 			contents: announcement.contents ? convertLexicalToHTML({ data: announcement.contents }) : '',
 			thumbnail: announcement.thumbnail as Media | undefined,
+			pinned: announcement.pinned ?? false,
 			createdAt: new Date(announcement.createdAt).toLocaleString('el-GR', {
 				year: 'numeric',
 				month: 'long',
@@ -33,16 +35,21 @@
 	{/if}
 
 	<div class="dark flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
-		<div class="container flex flex-col sm:flex-row  sm:justify-between items-start">
+		<div class="container flex flex-col items-start sm:flex-row sm:justify-between">
 			<h1>Τελευταία νέα & ανακοινώσεις</h1>
-			<Button variant='link' class='p-0'>
-				<a href="/news-and-announcements" class='decoration-dotted underline'>Δες τα όλα</a>
+			<Button variant="link" class="p-0">
+				<a href="/news-and-announcements" class="underline decoration-dotted">Δες τα όλα</a>
 			</Button>
 		</div>
 		{#each announcements as announcement (announcement.id)}
 			{@const hasThumbnail = announcement.thumbnail !== null}
 			<div class="container mx-auto grid grid-cols-2 gap-8">
-				<h2 class="col-span-2 h-max">{announcement.title}</h2>
+				<h2 class="col-span-2 inline-flex h-max items-center gap-4">
+					{#if announcement.pinned}
+						<PinIcon size={16} />
+					{/if}
+					{announcement.title}
+				</h2>
 				<div class="gap col-span-2 grid grid-cols-2 grid-rows-2 gap-8">
 					<div
 						class={cn(

@@ -59,9 +59,9 @@
 		</div>
 		<div class="flex flex-col gap-4 p-4 lg:p-0">
 			{@render footerSectionTitle('Social')}
-			<div class="flex gap-4">
-				<Button size="icon" variant="secondary"><FacebookIcon size={20} /></Button>
-				<Button size="icon" variant="secondary"><InstagramIcon size={20} /></Button>
+			<div class="flex gap-8 items-center">
+				<a href={contactDetails.instagramLink}><InstagramIcon size={20} /></a>
+				<a href={contactDetails.facebookLink}><FacebookIcon size={20} /></a>
 			</div>
 		</div>
 	</div>

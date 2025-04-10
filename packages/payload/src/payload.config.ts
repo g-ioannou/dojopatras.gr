@@ -44,7 +44,7 @@ export const config: Config = {
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || ''
-    },
+    }
     // prodMigrations: migrations, // this will cause turbo build to stall
     // push: false
   }),

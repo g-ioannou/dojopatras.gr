@@ -15,8 +15,8 @@ export const Website: GlobalConfig = {
     },
     {
       name: 'map-location',
-    type: 'point',
-            required: false
+      type: 'point',
+      required: false
     },
     {
       name: 'address',

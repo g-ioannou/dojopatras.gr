@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 			where: {
 				or: [{ draft: { equals: null } }, { draft: { equals: false } }]
 			},
+			sort: ['pinned', '-createdAt'],
 			limit: 3,
 			pagination: false
 		})

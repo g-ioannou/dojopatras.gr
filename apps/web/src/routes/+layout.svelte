@@ -16,7 +16,7 @@
 		email: data.websiteInfo?.email ?? '',
 		facebookLink: data.websiteInfo?.facebook ?? '',
 		instagramLink: data.websiteInfo?.instagram ?? '',
-		location: data.websiteInfo?.['map-location'] ?? [0, 0]
+		location: data.websiteInfo?.['map-location'] ?? [0, 0],
 	};
 </script>
 
