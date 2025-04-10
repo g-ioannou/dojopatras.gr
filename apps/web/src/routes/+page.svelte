@@ -25,7 +25,7 @@
 		})) ?? [];
 </script>
 
-<div class="md:30 flex flex-col gap-20 lg:gap-40">
+<div class="flex flex-col gap-20 lg:gap-40">
 	{#if websiteInfo?.hero}
         <div class="flex flex-col gap-20 bg-background py-20 text-foreground shadow-2xl">
 			<div class="container flex flex-col items-center gap-8 sm:flex-row">
